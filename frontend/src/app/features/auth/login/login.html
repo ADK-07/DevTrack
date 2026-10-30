@@ -1,0 +1,64 @@
+<main class="login-page">
+    <div class="login-container">
+        <div class="brand">
+            <div class="wordmark"><span class="brand-dev">Dev</span><span class="brand-track">Track</span></div>
+        </div>
+
+        <p class="subtitle">Log in to see where your projects stand and what your team shipped.</p>
+
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+            <div class="form-field">
+                <div class="input-wrap">
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M2 5h20v14H2V5zm2 2v.5l8 5 8-5V7H4zm16 3.8-8 5-8-5V17h16v-6.2z" />
+                    </svg>
+                    <input type="email" id="email" formControlName="email" placeholder="Email" autocomplete="email"
+                        aria-label="Email" />
+                </div>
+                <small class="error">
+                    @if (loginForm.controls.email.touched && loginForm.controls.email.hasError('required')) {
+                    Email is required.
+                    } @else if (loginForm.controls.email.touched && loginForm.controls.email.hasError('email')) {
+                    Enter a valid email address.
+                    } </small>
+            </div>
+
+            <div class="form-field">
+                <div class="input-wrap">
+                    <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M17 9V7a5 5 0 0 0-10 0v2H5v12h14V9h-2zM9 7a3 3 0 0 1 6 0v2H9V7z" />
+                    </svg>
+                    <input [type]="showPassword() ? 'text' : 'password'" id="password" formControlName="password"
+                        placeholder="Password" autocomplete="current-password" aria-label="Password" />
+                    <button type="button" class="toggle" (click)="showPassword.set(!showPassword())"
+                        [attr.aria-label]="showPassword() ? 'Hide password' : 'Show password'">
+                        @if (showPassword()) {
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M12 5C7 5 2.7 8.1 1 12c1.7 3.9 6 7 11 7s9.3-3.100 11-7c-1.700-3.900-6-7-11-7zm0 11a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm0-6a2 2 0 1 0 0 4 2 2 0 0 0 0-4z" />
+                        </svg>
+                        } @else {
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M2 4.300 3.300 3 21 20.700 19.700 22l-3-3A11.300 11.300 0 0 1 12 20C7 20 2.700 16.900 1 13c.9-2 2.300-3.700 4.100-5L2 4.300zM12 6c5 0 9.300 3.100 11 7-.7 1.600-1.800 3-3.100 4.100l-2.900-2.900a5 5 0 0 0-6.200-6.200L8.300 6.400C9.500 6.100 10.700 6 12 6zm-3.900 7.200a4 4 0 0 0 4.700 4.700l-4.700-4.700z" />
+                        </svg>
+                        }
+                    </button>
+                </div>
+                <small class="error">
+                    @if (loginForm.controls.password.touched && loginForm.controls.password.hasError('required')) {
+                    Password is required.
+                    } </small>
+            </div>
+
+            <button type="submit" class="submit-btn" [disabled]="isSubmitting()">
+                {{ isSubmitting() ? 'Logging in...' : 'Log in' }}
+            </button>
+        </form>
+
+        <p class="footer-text">
+            Don't have an account? <a routerLink="/register">Register</a>
+        </p>
+    </div>
+</main>

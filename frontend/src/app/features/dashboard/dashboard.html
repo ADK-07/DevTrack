@@ -1,0 +1,28 @@
+<div class="dashboard">
+    <header class="dashboard-header">
+        <div>
+            <h1>DevTrack</h1>
+            <p>Project management made simple.</p>
+        </div>
+        <button (click)="logout()">logout
+
+        </button>
+    </header>
+
+    <main class="dashboard-content">
+        <h2>Welcome back!</h2>
+
+        @if (authState.currentUser(); as user) {
+        <p>Hello, {{ user.full_name }}.</p>
+        <p>Email: {{ user.email }}</p>
+        <p>Role: {{ user.role }}</p>
+        } @else {
+        <p>Loading your account information...</p>
+        }
+
+        <section class="summary">
+            <h3>Your workspace</h3>
+            <p>Your projects and tasks will appear here.</p>
+        </section>
+    </main>
+</div>
